@@ -80,7 +80,7 @@ async function startServer() {
       }
     });
 
-    // ⭐ Top Rated Cars
+    //  Top Rated Cars
     app.get("/cars/top-rated", async (req, res) => {
       try {
         const cars = await carsCollection.find({}).sort({ rating: -1 }).limit(6).toArray();
@@ -90,8 +90,8 @@ async function startServer() {
       }
     });
 
-    // 🔍 Get Single Car by ID
-// In your Node.js/Express server file:
+
+//Node.js/Express server file:
 app.get("/cars/:id", async (req, res) => {
   try {
     const id = req.params.id;
@@ -121,7 +121,7 @@ app.get("/cars/:id", async (req, res) => {
       }
     });
 
-    // ❌ Delete Car
+    //  Delete Car
     app.delete("/cars/:id", async (req, res) => {
       const { id } = req.params;
       if (!ObjectId.isValid(id)) {
@@ -139,7 +139,7 @@ app.get("/cars/:id", async (req, res) => {
       }
     });
 
-    // 🧾 Book a Car
+    // Book a Car
 app.post("/my-bookings", async (req, res) => {
   try {
     const { carId, userName, userEmail } = req.body;
@@ -176,7 +176,7 @@ app.post("/my-bookings", async (req, res) => {
   }
 });
 
-    // 📚 Get All Bookings (or user-specific)
+    // Get All Bookings
    app.get("/my-bookings", async (req, res) => {
   try {
     const { userEmail } = req.query;
@@ -197,7 +197,7 @@ app.post("/my-bookings", async (req, res) => {
   }
 });
 
-    // 🚀 Start Server
+    //  Start Server
     app.listen(port, () => console.log(`🚀 Server running on port ${port}`));
   } catch (err) {
     console.error("❌ MongoDB connection failed:", err);
