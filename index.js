@@ -40,7 +40,7 @@ async function startServer() {
     });
 
   
-    app.post("/cars", async (req, res) => {
+    app.post("/cars",verifyToken, async (req, res) => {
       try {
         const car = req.body;
         if (!car.carName || !car.description || !car.rentPrice || !car.location) {
@@ -59,7 +59,7 @@ async function startServer() {
     });
 
     // 📋 Get All Cars
-    app.get("/cars", async (req, res) => {
+    app.get("/cars",verifyToken, async (req, res) => {
       try {
         const { search } = req.query;
         const query = search ? { carName: { $regex: search, $options: "i" } } : {};
@@ -71,7 +71,7 @@ async function startServer() {
     });
 
     //  Featured Cars
-    app.get("/cars/featured", async (req, res) => {
+    app.get("/cars/featured",verifyToken, async (req, res) => {
       try {
         const cars = await carsCollection.find({}).sort({ _id: -1 }).limit(6).toArray();
         res.json(cars);
@@ -81,7 +81,7 @@ async function startServer() {
     });
 
     //  Top Rated Cars
-    app.get("/cars/top-rated", async (req, res) => {
+    app.get("/cars/top-rated", verifyToken,async (req, res) => {
       try {
         const cars = await carsCollection.find({}).sort({ rating: -1 }).limit(6).toArray();
         res.json(cars);
@@ -92,7 +92,7 @@ async function startServer() {
 
 
 //Node.js/Express server file:
-app.get("/cars/:id", async (req, res) => {
+app.get("/cars/:id",verifyToken, async (req, res) => {
   try {
     const id = req.params.id;
     // const car = await carsCollection.findOne({ _id: new ObjectId(id) });
@@ -106,7 +106,7 @@ app.get("/cars/:id", async (req, res) => {
 });
 
     //  Update Car
-    app.patch("/cars/:id", async (req, res) => {
+    app.patch("/cars/:id",verifyToken, async (req, res) => {
       const { id } = req.params;
       if (!ObjectId.isValid(id)) {
         return res.status(400).json({ message: "Invalid car ID" });
@@ -122,7 +122,7 @@ app.get("/cars/:id", async (req, res) => {
     });
 
     //  Delete Car
-    app.delete("/cars/:id", async (req, res) => {
+    app.delete("/cars/:id",verifyToken, async (req, res) => {
       const { id } = req.params;
       if (!ObjectId.isValid(id)) {
         return res.status(400).json({ message: "Invalid car ID" });
@@ -140,7 +140,7 @@ app.get("/cars/:id", async (req, res) => {
     });
 
     // Book a Car
-app.post("/my-bookings", async (req, res) => {
+app.post("/my-bookings",verifyToken, async (req, res) => {
   try {
     const { carId, userName, userEmail } = req.body;
     if (!carId || !userName || !userEmail) {
@@ -177,7 +177,7 @@ app.post("/my-bookings", async (req, res) => {
 });
 
     // Get All Bookings
-   app.get("/my-bookings", async (req, res) => {
+   app.get("/my-bookings",verifyToken, async (req, res) => {
   try {
     const { userEmail } = req.query;
     const query = userEmail ? { userEmail } : {};
