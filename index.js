@@ -34,7 +34,7 @@ async function startServer() {
     bookingsCollection = db.collection("bookings");
     console.log("✅ Connected to MongoDB!");
 
-    // Root test route
+   
     app.get("/", (req, res) => {
       res.send("🚗 SmartBD Server is Running!");
     });
