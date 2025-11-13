@@ -39,7 +39,7 @@ async function startServer() {
       res.send("🚗 SmartBD Server is Running!");
     });
 
-    // ➕ Add Car
+  
     app.post("/cars", async (req, res) => {
       try {
         const car = req.body;
