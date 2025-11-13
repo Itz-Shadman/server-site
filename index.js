@@ -70,7 +70,7 @@ async function startServer() {
       }
     });
 
-    // 🌟 Featured Cars
+    //  Featured Cars
     app.get("/cars/featured", async (req, res) => {
       try {
         const cars = await carsCollection.find({}).sort({ _id: -1 }).limit(6).toArray();
