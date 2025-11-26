@@ -35,7 +35,7 @@ async function run() {
       res.send(car);
     });
 
-    // Featured cars
+    // Featured Cars
     app.get("/featured-cars", async (req, res) => {
       const cars = await carsCollection.find().sort({ _id: -1 }).limit(6).toArray();
       res.send(cars);
