@@ -23,7 +23,7 @@ async function run() {
     const carsCollection = db.collection("cars");
     const bookingsCollection = db.collection("bookings");
 
-    // All cars
+    // All Cars
     app.get("/cars", async (req, res) => {
       const cars = await carsCollection.find().toArray();
       res.send(cars);
